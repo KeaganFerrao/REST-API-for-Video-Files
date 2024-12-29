@@ -38,31 +38,36 @@ Follow these steps to set up the repository:
    FFMPEG_PATH=/path/to/ffmpeg
    ```
 
-2. **Compile TypeScript to JavaScript:**
+2. **Install Node.js:**
+   Ensure you have Node.js version **20 or greater** installed.
+
+3. **Compile TypeScript to JavaScript:**
    ```bash
    npm run compile
    ```
    This will compile the TypeScript files into JavaScript.
 
-3. **Run Database Migrations:**
+4. **Run Database Migrations:**
    ```bash
    npm run migrate
    ```
    This will create the SQLite database and tables. A `database.sqlite` file will be automatically created in the `dist` directory.
 
-4. **Seed the Database:**
+   **Note:** If you are unable to migrate or seed, a `database.sqlite.bak` file is present in the root directory. Rename this file to `database.sqlite` and copy it to the root of the compiled `dist` folder.
+
+5. **Seed the Database:**
    ```bash
    npm run seed
    ```
    This will insert initial data into the database.
 
-5. **Run the Test Suite:**
+6. **Run the Test Suite:**
    ```bash
    npm test
    ```
-   This will execute all unit and end-to-end tests to ensure the API works as expected.
+   This will execute all unit and integration tests to ensure the API works as expected.
 
-6. **Start the API Server:**
+7. **Start the Development Server:**
    ```bash
    npm run dev
    ```
@@ -168,7 +173,7 @@ curl -X GET "{{BASE_URL}}/v1/video/list" \
 
 ## Configuration
 
-The database includes a `setting` table where the following configurations can be modified:
+The application includes a `settings` table in the database where the following configurations can be modified:
 
 - **maxSize**: Maximum size (in KB) for uploaded videos.
 - **minSize**: Minimum size (in KB) for uploaded videos.
@@ -187,3 +192,4 @@ To change these settings, update the respective values in the `settings` table.
 2. Ensure you have the appropriate API key for authorization.
 3. Video files and IDs referenced in examples should match your environment.
 4. This project uses an SQLite database. When migrations are run, a `database.sqlite` file will be created in the `dist` directory.
+5. If you face issues with migrations or seeding, use the `database.sqlite.bak` file in the root directory. Rename it to `database.sqlite` and copy it to the `dist` folder.

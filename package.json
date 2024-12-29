@@ -25,6 +25,7 @@
     "@types/node": "^20.8.4",
     "@types/sequelize": "^4.28.20",
     "@types/supertest": "^6.0.2",
+    "sequelize-cli": "^6.6.2",
     "ts-jest": "^29.2.5",
     "typescript": "^5.2.2"
   },
