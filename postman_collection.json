@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "44bb210e-580f-4d6b-859c-5563bf889c66",
+		"name": "REST API for Video Files",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27018385",
+		"_collection_link": "https://osp-labs.postman.co/workspace/OSP~b74cd235-895b-48e5-8224-7dea08e5018b/collection/27018385-44bb210e-580f-4d6b-859c-5563bf889c66?action=share&source=collection_link&creator=27018385"
+	},
+	"item": [
+		{
+			"name": "Upload Video",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "video",
+							"type": "file",
+							"src": "/home/keagan/node/ffmpeg/video1.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/v1/video/upload",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"video",
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Upload Video",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/home/keagan/node/ffmpeg/video2.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/v1/video/upload",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"v1",
+								"video",
+								"upload"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-xJkXZcn9F5vG5cFd1VfidN/MhnA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Dec 2024 12:58:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"uniqueId\": \"cbfde1fb-9106-4fff-840c-801646563d59\"\n    },\n    \"message\": \"Video uploaded successfully\",\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Trim Video",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startTime\": \"00:00:00\",\n    \"endTime\": \"00:01:30\",\n    \"override\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/v1/video/trim/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"video",
+						"trim",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Trim Video",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startTime\": \"00:00:00\",\n    \"endTime\": \"00:00:30\",\n    \"override\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/v1/video/trim/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"v1",
+								"video",
+								"trim",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "126"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7e-OQa7R6On7qRinXAmf8WoVMihVAs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Dec 2024 12:56:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"uniqueId\": \"f3e62ea3-dd36-4978-bba7-a18cbcf81793\"\n    },\n    \"message\": \"Video trimmed successfully\",\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Merge Videos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/v1/video/merge?ids=1,2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"video",
+						"merge"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "1,2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Merge Videos",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/v1/video/merge?ids=1,4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"v1",
+								"video",
+								"merge"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1,4"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "126"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7e-VF3maLOVbTv0Os8wu2tRM4GIZ4g\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Dec 2024 12:58:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"uniqueId\": \"2b72cd27-e106-4415-87d6-95adfe844f19\"\n    },\n    \"message\": \"Videos merged successfully\",\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Generate Video Link",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/v1/video/generate-link/8",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"video",
+						"generate-link",
+						"8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Generate Video Link",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/v1/video/generate-link/5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"v1",
+								"video",
+								"generate-link",
+								"5"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "195"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c3-Z06TdigtjBSkL7e3BtkDYn/5AK0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Dec 2024 12:58:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"link\": \"http://localhost:3005/v1/video/download/3a930a58-e84c-46ee-873f-30f23dad2699?expiry=2024-12-29T13:00:27.348Z\"\n    },\n    \"message\": \"Link generated successfully\",\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "List Videos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/v1/video/list",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"video",
+						"list"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Videos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/v1/video/list",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"v1",
+								"video",
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1060"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"424-4M1XzZ/IXs3MBf1qyfNEFUKHs3s\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Dec 2024 12:58:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"uniqueId\": \"0d5154ac-5235-4502-89dc-e6e10ca46db2\",\n            \"fileName\": \"video2.mp4\",\n            \"uploadedOn\": \"2024-12-29T12:55:27.066Z\",\n            \"duration\": 17.28,\n            \"extension\": \"mp4\",\n            \"mimeType\": \"video/mp4\"\n        },\n        {\n            \"id\": 2,\n            \"uniqueId\": \"f3e62ea3-dd36-4978-bba7-a18cbcf81793\",\n            \"fileName\": \"sample_960x400_ocean_with_audio.mov\",\n            \"uploadedOn\": \"2024-12-29T12:55:54.729Z\",\n            \"duration\": 30,\n            \"extension\": \"mov\",\n            \"mimeType\": \"video/quicktime\"\n        },\n        {\n            \"id\": 3,\n            \"uniqueId\": \"dda8bab9-d30c-476c-9056-31a6e43004cf\",\n            \"fileName\": \"merged_2024-12-29T12:56:42.251Z.mp4\",\n            \"uploadedOn\": \"2024-12-29T12:56:42.251Z\",\n            \"duration\": 47.28,\n            \"extension\": \"mp4\",\n            \"mimeType\": \"video/mp4\"\n        },\n        {\n            \"id\": 4,\n            \"uniqueId\": \"cbfde1fb-9106-4fff-840c-801646563d59\",\n            \"fileName\": \"video2.mp4\",\n            \"uploadedOn\": \"2024-12-29T12:58:00.078Z\",\n            \"duration\": 17.28,\n            \"extension\": \"mp4\",\n            \"mimeType\": \"video/mp4\"\n        },\n        {\n            \"id\": 5,\n            \"uniqueId\": \"2b72cd27-e106-4415-87d6-95adfe844f19\",\n            \"fileName\": \"merged_2024-12-29T12:58:11.939Z.mp4\",\n            \"uploadedOn\": \"2024-12-29T12:58:11.939Z\",\n            \"duration\": 34.56,\n            \"extension\": \"mp4\",\n            \"mimeType\": \"video/mp4\"\n        }\n    ],\n    \"message\": \"Videos fetched successfully\",\n    \"errors\": []\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_KEY",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
