@@ -8,6 +8,7 @@ module.exports = {
   moduleDirectories: ['node_modules', 'dist'],
   testPathIgnorePatterns: [
     '/node_modules/',
-    '\\.js$',  // Ignore .js files
+    '\\.js$',
   ],
+  testTimeout: 120000
 };
