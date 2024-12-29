@@ -7,5 +7,6 @@ config({
 export const {
     PORT,
     FFMPEG_PATH,
+    FFPROBE_PATH,
     API_BASE_URL,
 } = process.env;

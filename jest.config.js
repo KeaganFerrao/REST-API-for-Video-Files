@@ -10,5 +10,6 @@ module.exports = {
     '/node_modules/',
     '\\.js$',
   ],
-  testTimeout: 120000
+  testTimeout: 60000,
+  setupFiles: ['./loadEnv.js']
 };

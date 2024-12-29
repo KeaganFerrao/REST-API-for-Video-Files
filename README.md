@@ -33,9 +33,10 @@ Follow these steps to set up the repository:
 1. **Install FFmpeg:**
    Ensure FFmpeg is installed on your system. You can download it from [FFmpeg's official website](https://ffmpeg.org/download.html).
    
-   Optionally, specify the FFmpeg path in the `.env` file:
+   Optionally, specify the path in the `.env` file:
    ```
    FFMPEG_PATH=/path/to/ffmpeg
+   FFPROBE_PATH=/path/to/ffprobe
    ```
 
 2. **Install Node.js:**
