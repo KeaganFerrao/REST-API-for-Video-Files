@@ -40,15 +40,21 @@ Follow these steps to set up the repository:
    ```
 
 2. **Install Node.js:**
-   Ensure you have Node.js version **20 or greater** installed.
+   Ensure you have Node.js version **20 or greater** installed and compatible npm version.
 
-3. **Compile TypeScript to JavaScript:**
+3. **Install the Dependencies:**
+   ```bash
+   npm install
+   ```
+   This will install all the dependencies.
+
+4. **Compile TypeScript to JavaScript:**
    ```bash
    npm run compile
    ```
    This will compile the TypeScript files into JavaScript.
 
-4. **Run Database Migrations:**
+5. **Run Database Migrations:**
    ```bash
    npm run migrate
    ```
@@ -56,19 +62,19 @@ Follow these steps to set up the repository:
 
    **Note:** If you are unable to migrate or seed, a `database.sqlite.bak` file is present in the root directory. Rename this file to `database.sqlite` and copy it to the root of the compiled `dist` folder.
 
-5. **Seed the Database:**
+6. **Seed the Database:**
    ```bash
    npm run seed
    ```
    This will insert initial data into the database.
 
-6. **Run the Test Suite:**
+7. **Run the Test Suite:**
    ```bash
    npm test
    ```
    This will execute all unit and integration tests to ensure the API works as expected.
 
-7. **Start the Development Server:**
+8. **Start the Development Server:**
    ```bash
    npm run dev
    ```
