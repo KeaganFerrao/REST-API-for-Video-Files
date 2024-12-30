@@ -17,7 +17,7 @@ describe('Video APIs', () => {
         await setting.create({
             maxSize: 100000,
             minSize: 10,
-            maxDuration: 600,
+            maxDuration: 100,
             minDuration: 1,
             linkExpiryInMin: 60,
             maxVideoMergeCount: 5
@@ -44,7 +44,7 @@ describe('Video APIs', () => {
     });
 
     it('should upload a video and return video metadata', async () => {
-        const videoPath = path.join(__dirname, 'assets', 'video.mp4'); // Path to test video file
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
         const videoBuffer = fs.readFileSync(videoPath);
 
         const response = await request(app)
@@ -68,6 +68,18 @@ describe('Video APIs', () => {
         uploadedVideos.push(savedVideo!.uniqueId);
     });
 
+    it('should upload a video greater than maximum duration', async () => {
+        const videoPath = path.join(__dirname, 'assets', 'video1.mp4');
+        const videoBuffer = fs.readFileSync(videoPath);
+
+        await request(app)
+            .post('/v1/video/upload')
+            .attach('video', videoBuffer, 'test-video.mp4')
+            .set('Content-Type', 'multipart/form-data')
+            .set('x-api-key', 'testtoken')
+            .expect(400);
+    });
+
     it('should return 400 if no file is provided', async () => {
         const response = await request(app)
             .post('/v1/video/upload')
@@ -88,7 +100,7 @@ describe('Video APIs', () => {
     });
 
     it('should upload and trim the uploaded video', async () => {
-        const videoPath = path.join(__dirname, 'assets', 'video.mp4'); // Path to test video file
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
         const videoBuffer = fs.readFileSync(videoPath);
 
         const response = await request(app)
@@ -133,8 +145,8 @@ describe('Video APIs', () => {
         uploadedVideos.push(trimResponse.body.data.uniqueId);
     });
 
-    it('should upload a video and generate video link', async () => {
-        const videoPath = path.join(__dirname, 'assets', 'video.mp4'); // Path to test video file
+    it('should upload and trim the uploaded video with an invalid duration beyond the video', async () => {
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
         const videoBuffer = fs.readFileSync(videoPath);
 
         const response = await request(app)
@@ -152,7 +164,42 @@ describe('Video APIs', () => {
                 uniqueId: response.body.data.uniqueId
             }
         });
-        expect(savedVideo).toBeTruthy(); // Video should be saved in the DB
+        expect(savedVideo).toBeTruthy();
+        expect(fs.existsSync(path.join(__dirname, '../uploads', savedVideo!.uniqueId))).toBe(true);
+
+        await request(app)
+            .patch(`/v1/video/trim/${savedVideo!.id}`)
+            .send({
+                startTime: "00:00:00",
+                endTime: "00:01:10",
+                override: true
+            })
+            .set('x-api-key', 'testtoken')
+            .expect(400);
+
+        uploadedVideos.push(savedVideo!.uniqueId);
+    });
+
+    it('should upload a video and generate video link', async () => {
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
+        const videoBuffer = fs.readFileSync(videoPath);
+
+        const response = await request(app)
+            .post('/v1/video/upload')
+            .attach('video', videoBuffer, 'test-video.mp4')
+            .set('Content-Type', 'multipart/form-data')
+            .set('x-api-key', 'testtoken')
+            .expect(201);
+
+        expect(response.body).toHaveProperty('data');
+        expect(response.body.data).toHaveProperty('uniqueId', expect.any(String));
+
+        const savedVideo = await video.findOne({
+            where: {
+                uniqueId: response.body.data.uniqueId
+            }
+        });
+        expect(savedVideo).toBeTruthy();
         expect(fs.existsSync(path.join(__dirname, '../uploads', savedVideo!.uniqueId))).toBe(true);
 
         const linkResponse = await request(app)
@@ -166,8 +213,15 @@ describe('Video APIs', () => {
         uploadedVideos.push(savedVideo!.uniqueId);
     });
 
+    it('should try to generate video link for an invalid un-uploaded video id', async () => {
+        await request(app)
+            .get(`/v1/video/generate-link/1234`)
+            .set('x-api-key', 'testtoken')
+            .expect(404);
+    });
+
     it('should upload a video and list it', async () => {
-        const videoPath = path.join(__dirname, 'assets', 'video.mp4'); // Path to test video file
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
         const videoBuffer = fs.readFileSync(videoPath);
 
         const response = await request(app)
@@ -185,7 +239,7 @@ describe('Video APIs', () => {
                 uniqueId: response.body.data.uniqueId
             }
         });
-        expect(savedVideo).toBeTruthy(); // Video should be saved in the DB
+        expect(savedVideo).toBeTruthy();
         expect(fs.existsSync(path.join(__dirname, '../uploads', savedVideo!.uniqueId))).toBe(true);
 
         const listResponse = await request(app)
@@ -201,7 +255,7 @@ describe('Video APIs', () => {
     });
 
     it('should upload 2 videos and merge it', async () => {
-        const videoPath = path.join(__dirname, 'assets', 'video.mp4'); // Path to test video file
+        const videoPath = path.join(__dirname, 'assets', 'video.mp4');
         const videoBuffer = fs.readFileSync(videoPath);
 
         const responses = await Promise.all([
@@ -242,6 +296,13 @@ describe('Video APIs', () => {
         expect(mergeResponse.body.data).toHaveProperty('uniqueId', expect.any(String));
 
         uploadedVideos.push(savedVideo1!.uniqueId, savedVideo2!.uniqueId, mergeResponse.body.data.uniqueId);
+    });
+
+    it('should try to merge 2 invalid un-uploaded video ids', async () => {
+        await request(app)
+            .post(`/v1/video/merge?ids=1234,12345`)
+            .set('x-api-key', 'testtoken')
+            .expect(404);
     });
 
 });
